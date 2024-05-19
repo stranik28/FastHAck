@@ -1,0 +1,62 @@
+basePath: /
+consumes:
+- application/json
+definitions:
+  gin.H:
+    additionalProperties: {}
+    type: object
+  main.LinkRequest:
+    properties:
+      url:
+        type: string
+    required:
+    - url
+    type: object
+  main.LinkResponse:
+    properties:
+      received_url:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server for a simple Gin application with Swagger documentation.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Gin Swagger Example API
+  version: "1.0"
+paths:
+  /link:
+    post:
+      consumes:
+      - application/json
+      description: Принимает ссылку и возвращает ее в ответе
+      parameters:
+      - description: Запрос с ссылкой
+        in: body
+        name: linkRequest
+        required: true
+        schema:
+          $ref: '#/definitions/main.LinkRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Полученная ссылка
+          schema:
+            $ref: '#/definitions/main.LinkResponse'
+        "400":
+          description: Ошибка запроса
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Получить ссылку
+      tags:
+      - link
+produces:
+- application/json
+swagger: "2.0"
